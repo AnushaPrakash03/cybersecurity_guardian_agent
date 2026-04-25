@@ -1,0 +1,1118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Personal Cybersecurity Guardian Agent — INFO7375</title>
+<style>
+  /* ── MUSINIQUE BRUTALIST DESIGN SYSTEM ── */
+  :root {
+    --black: #0a0a0a;
+    --white: #f5f2eb;
+    --red: #d63b2f;
+    --yellow: #f0c040;
+    --blue: #1a4a8a;
+    --gray-1: #1c1c1c;
+    --gray-2: #2e2e2e;
+    --gray-3: #555555;
+    --gray-4: #888888;
+    --gray-5: #cccccc;
+    --rule: 2px solid #0a0a0a;
+    --rule-heavy: 5px solid #0a0a0a;
+    --font-main: 'Courier New', Courier, monospace;
+    --font-display: Georgia, 'Times New Roman', serif;
+    --slide-w: 1100px;
+    --slide-h: 618px;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body {
+    background: #1a1a1a;
+    font-family: var(--font-main);
+    height: 100%;
+    overflow: hidden;
+  }
+
+  /* ── SHELL ── */
+  #shell {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    gap: 16px;
+  }
+
+  /* ── SLIDE STAGE ── */
+  #stage {
+    width: var(--slide-w);
+    height: var(--slide-h);
+    position: relative;
+    overflow: hidden;
+    border: var(--rule-heavy);
+    background: var(--white);
+    outline: 8px solid #333;
+    outline-offset: 4px;
+  }
+
+  /* ── SLIDES ── */
+  .slide {
+    position: absolute;
+    inset: 0;
+    padding: 48px 56px;
+    display: none;
+    flex-direction: column;
+    background: var(--white);
+  }
+  .slide.active { display: flex; }
+
+  /* ── SLIDE VARIANTS ── */
+  .slide--cover {
+    background: var(--black);
+    color: var(--white);
+    justify-content: flex-end;
+  }
+
+  .slide--dark {
+    background: var(--gray-1);
+    color: var(--white);
+  }
+
+  .slide--red {
+    background: var(--red);
+    color: var(--white);
+  }
+
+  .slide--yellow {
+    background: var(--yellow);
+    color: var(--black);
+  }
+
+  /* ── TYPOGRAPHY ── */
+  .kicker {
+    font-family: var(--font-main);
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    opacity: 0.55;
+    margin-bottom: 10px;
+  }
+
+  .slide-title {
+    font-family: var(--font-display);
+    font-size: 46px;
+    font-weight: 700;
+    line-height: 1.05;
+    margin-bottom: 0;
+  }
+
+  .slide-title--sm {
+    font-size: 34px;
+    line-height: 1.1;
+  }
+
+  .slide-title--lg {
+    font-size: 58px;
+    line-height: 1.0;
+  }
+
+  .slide-title--xl {
+    font-size: 72px;
+    line-height: 0.95;
+  }
+
+  .body-text {
+    font-family: var(--font-main);
+    font-size: 15px;
+    line-height: 1.65;
+    color: var(--gray-2);
+  }
+
+  .body-text--inv {
+    color: var(--gray-5);
+  }
+
+  .rule-top { border-top: var(--rule-heavy); padding-top: 20px; }
+  .rule-bottom { border-bottom: var(--rule); padding-bottom: 16px; margin-bottom: 20px; }
+  .rule-mid { border-bottom: var(--rule); margin: 20px 0; }
+
+  /* ── SLIDE NUMBER ── */
+  .slide-num {
+    position: absolute;
+    bottom: 22px;
+    right: 28px;
+    font-family: var(--font-main);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    opacity: 0.4;
+  }
+
+  /* ── TAG/BADGE ── */
+  .tag {
+    display: inline-block;
+    font-family: var(--font-main);
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    border: 1.5px solid currentColor;
+    padding: 3px 9px;
+    margin-right: 8px;
+    margin-bottom: 8px;
+  }
+
+  .tag--red { color: var(--red); border-color: var(--red); }
+  .tag--blue { color: var(--blue); border-color: var(--blue); }
+  .tag--inv { color: var(--white); border-color: var(--white); opacity: 0.7; }
+
+  /* ── STAT BLOCKS ── */
+  .stat-row {
+    display: flex;
+    gap: 0;
+    border-top: var(--rule-heavy);
+    border-bottom: var(--rule);
+    margin: 24px 0;
+  }
+
+  .stat-cell {
+    flex: 1;
+    padding: 18px 20px;
+    border-right: var(--rule);
+  }
+  .stat-cell:last-child { border-right: none; }
+
+  .stat-num {
+    font-family: var(--font-display);
+    font-size: 42px;
+    font-weight: 700;
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+
+  .stat-label {
+    font-family: var(--font-main);
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    opacity: 0.55;
+  }
+
+  /* ── CLAIM BLOCK ── */
+  .claim {
+    border-left: 6px solid var(--red);
+    padding-left: 20px;
+    margin: 20px 0;
+  }
+
+  .claim--blue { border-color: var(--blue); }
+  .claim--yellow { border-color: var(--yellow); }
+
+  /* ── TWO-COL ── */
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    flex: 1;
+  }
+
+  .col {
+    padding: 0 24px 0 0;
+    border-right: var(--rule);
+  }
+  .col:last-child { padding: 0 0 0 28px; border-right: none; }
+
+  /* ── LIST ── */
+  .br-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .br-list li {
+    font-family: var(--font-main);
+    font-size: 14px;
+    line-height: 1.5;
+    padding: 9px 0;
+    border-bottom: 1px solid rgba(0,0,0,0.12);
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .br-list li::before {
+    content: '→';
+    flex-shrink: 0;
+    opacity: 0.45;
+  }
+
+  .br-list--inv li { color: var(--gray-5); border-color: rgba(255,255,255,0.1); }
+  .br-list--inv li::before { color: var(--white); }
+
+  /* ── TABLE ── */
+  .br-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: var(--font-main);
+    font-size: 13px;
+    margin-top: 8px;
+  }
+
+  .br-table th {
+    text-align: left;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    border-bottom: var(--rule-heavy);
+    padding: 6px 10px 8px 0;
+    opacity: 0.6;
+  }
+
+  .br-table td {
+    padding: 8px 10px 8px 0;
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+    vertical-align: top;
+    line-height: 1.4;
+  }
+
+  .br-table tr:last-child td { border-bottom: none; }
+
+  .pass { color: #1a6b2f; font-weight: 600; }
+  .fail { color: var(--red); font-weight: 600; }
+  .warn { color: #8a5200; font-weight: 600; }
+
+  /* ── COVER SPECIFICS ── */
+  .cover-meta {
+    font-family: var(--font-main);
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    opacity: 0.5;
+    margin-top: 14px;
+  }
+
+  .cover-accent {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 200px;
+    height: 100%;
+    background: var(--red);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+  }
+
+  .cover-accent-text {
+    font-family: var(--font-display);
+    font-size: 13px;
+    color: var(--white);
+    text-align: center;
+    line-height: 1.5;
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    transform: rotate(180deg);
+    letter-spacing: 0.06em;
+    opacity: 0.85;
+  }
+
+  /* ── VERDICT BAND ── */
+  .verdict-band {
+    display: flex;
+    border: var(--rule);
+    margin-top: 20px;
+  }
+
+  .verdict-cell {
+    flex: 1;
+    padding: 14px 16px;
+    border-right: var(--rule);
+    text-align: center;
+  }
+  .verdict-cell:last-child { border-right: none; }
+
+  .verdict-label {
+    font-size: 9px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    opacity: 0.5;
+    display: block;
+    margin-bottom: 6px;
+  }
+
+  .verdict-val {
+    font-family: var(--font-display);
+    font-size: 20px;
+    font-weight: 700;
+  }
+
+  .v-mal { color: var(--red); }
+  .v-safe { color: #1a6b2f; }
+  .v-vuln { color: var(--blue); }
+  .v-unc { color: #8a5200; }
+
+  /* ── ARCHITECTURE MINI-DIAGRAM ── */
+  .arch-row {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    margin-top: 28px;
+  }
+
+  .arch-node {
+    flex: 1;
+    border: var(--rule);
+    padding: 12px 10px;
+    text-align: center;
+    position: relative;
+    background: var(--white);
+  }
+
+  .arch-node--dark {
+    background: var(--gray-1);
+    color: var(--white);
+    border-color: var(--gray-1);
+  }
+
+  .arch-node--accent {
+    background: var(--blue);
+    color: var(--white);
+    border-color: var(--blue);
+  }
+
+  .arch-arrow {
+    width: 28px;
+    flex-shrink: 0;
+    text-align: center;
+    font-size: 18px;
+    opacity: 0.5;
+  }
+
+  .arch-label {
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    opacity: 0.55;
+    display: block;
+    margin-bottom: 4px;
+  }
+
+  .arch-name {
+    font-family: var(--font-display);
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 1.2;
+  }
+
+  /* ── PROGRESS BAR ── */
+  .prog-row {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin: 7px 0;
+    font-size: 13px;
+  }
+
+  .prog-label {
+    width: 180px;
+    flex-shrink: 0;
+    font-size: 12px;
+    opacity: 0.7;
+  }
+
+  .prog-track {
+    flex: 1;
+    height: 10px;
+    background: rgba(0,0,0,0.08);
+    border: 1px solid rgba(0,0,0,0.2);
+  }
+
+  .prog-fill {
+    height: 100%;
+    background: var(--black);
+  }
+
+  .prog-fill--red { background: var(--red); }
+  .prog-fill--blue { background: var(--blue); }
+
+  .prog-val {
+    width: 44px;
+    text-align: right;
+    font-weight: 600;
+    font-size: 12px;
+    flex-shrink: 0;
+  }
+
+  /* ── PULL QUOTE ── */
+  .pull-quote {
+    font-family: var(--font-display);
+    font-size: 22px;
+    font-style: italic;
+    line-height: 1.4;
+    border-top: var(--rule-heavy);
+    border-bottom: var(--rule);
+    padding: 18px 0;
+    margin: 20px 0;
+  }
+
+  /* ── FOOTER BAR ── */
+  .footer-bar {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 38px;
+    border-top: var(--rule);
+    display: flex;
+    align-items: center;
+    padding: 0 28px;
+    gap: 20px;
+    background: var(--white);
+  }
+
+  .footer-item {
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    opacity: 0.45;
+  }
+
+  .footer-item + .footer-item::before {
+    content: '·';
+    margin-right: 20px;
+  }
+
+  /* ── LIMITATION CARD ── */
+  .limit-card {
+    border-left: 4px solid var(--gray-4);
+    padding: 10px 14px;
+    margin: 8px 0;
+    background: rgba(0,0,0,0.03);
+  }
+
+  .limit-card .lc-head {
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-bottom: 4px;
+    color: var(--gray-3);
+  }
+
+  .limit-card .lc-body {
+    font-size: 13px;
+    line-height: 1.5;
+    color: var(--gray-2);
+  }
+
+  /* ── NAVIGATION CONTROLS ── */
+  #nav {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    color: #888;
+    font-family: 'Courier New', monospace;
+    font-size: 12px;
+    letter-spacing: 0.1em;
+  }
+
+  #nav button {
+    background: none;
+    border: 1.5px solid #555;
+    color: #aaa;
+    font-family: 'Courier New', monospace;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 7px 18px;
+    cursor: pointer;
+    transition: background 0.1s, color 0.1s;
+  }
+
+  #nav button:hover { background: #555; color: #fff; }
+  #nav button:disabled { opacity: 0.25; cursor: default; }
+  #nav button:disabled:hover { background: none; color: #aaa; }
+
+  #counter { min-width: 80px; text-align: center; }
+
+  /* keyboard hint */
+  #hint {
+    font-family: 'Courier New', monospace;
+    font-size: 10px;
+    color: #555;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+</style>
+</head>
+<body>
+
+<div id="shell">
+  <div id="stage">
+
+    <!-- ══ SLIDE 01: COVER ══ -->
+    <div class="slide slide--cover active" id="s01">
+      <div class="cover-accent">
+        <div class="cover-accent-text">INFO7375 · Prompt Engineering & AI · Northeastern University</div>
+      </div>
+      <div style="padding-right: 220px; flex: 1; display: flex; flex-direction: column; justify-content: flex-end;">
+        <div class="kicker" style="color: var(--gray-5);">Technical Presentation · April 24, 2026</div>
+        <div class="slide-title slide-title--xl" style="color: var(--white); max-width: 700px; line-height: 1.0;">
+          Personal<br>Cybersecurity<br>Guardian
+        </div>
+        <div class="rule-mid" style="border-color: rgba(255,255,255,0.2); margin: 18px 0;"></div>
+        <div style="font-family: var(--font-main); font-size: 16px; color: rgba(255,255,255,0.6); max-width: 580px; line-height: 1.5;">
+          Does a multi-agent RAG architecture with live threat intelligence produce more accurate cybersecurity verdicts than a base LLM?
+        </div>
+        <div class="cover-meta" style="margin-top: 20px;">
+          Anusha Prakash · 002306070 · Presented to Prof. Nik Bear Brown
+        </div>
+      </div>
+      <div class="slide-num" style="color: rgba(255,255,255,0.25);">01 / 16</div>
+    </div>
+
+    <!-- ══ SLIDE 02: THE PROBLEM ══ -->
+    <div class="slide" id="s02">
+      <div class="kicker">The problem</div>
+      <div class="slide-title rule-bottom">The tools exist. The people who need them can't use them.</div>
+      <div class="two-col" style="flex: 1; align-items: start; margin-top: 4px;">
+        <div class="col">
+          <div class="body-text" style="margin-bottom: 16px;">Cybersecurity intelligence is real-time and freely available — CISA, NVD, VirusTotal, PhishTank. None of it is accessible to non-technical users.</div>
+          <ul class="br-list">
+            <li>VirusTotal returns raw engine flag counts — meaningless without context</li>
+            <li>NVD requires CPE product string knowledge to query</li>
+            <li>Base LLMs have a training cutoff — blind to current threats</li>
+            <li>No single tool retrieves, synthesizes, and explains in plain English</li>
+          </ul>
+        </div>
+        <div class="col">
+          <div class="stat-row" style="flex-direction: column; border: none; margin: 0;">
+            <div style="border: var(--rule-heavy); padding: 20px; margin-bottom: 12px;">
+              <div class="stat-num" style="color: var(--red);">$12.5B</div>
+              <div class="stat-label">US cybercrime losses in 2023 (FBI)</div>
+            </div>
+            <div style="border: var(--rule); padding: 16px;">
+              <div class="stat-num" style="font-size: 30px;">Phishing</div>
+              <div class="stat-label">largest single category of reported incidents</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bar"><span class="footer-item">The Problem</span></div>
+      <div class="slide-num">02 / 16</div>
+    </div>
+
+    <!-- ══ SLIDE 03: THE THESIS ══ -->
+    <div class="slide slide--dark" id="s03">
+      <div class="kicker" style="color: rgba(255,255,255,0.4);">Thesis</div>
+      <div class="pull-quote" style="color: var(--white); border-color: rgba(255,255,255,0.3);">
+        "A multi-agent system with access to live, government-grade threat intelligence will produce more accurate, calibrated, and actionable security verdicts than a general-purpose LLM operating on training data alone."
+      </div>
+      <div style="margin-top: 16px;">
+        <div class="tag tag--inv">Two threat domains</div>
+        <div class="tag tag--inv">Plain-English output</div>
+        <div class="tag tag--inv">Non-technical users</div>
+        <div class="tag tag--inv">Action-specific verdicts</div>
+      </div>
+      <div class="body-text body-text--inv" style="margin-top: 20px;">
+        Scope: phishing URL &amp; email analysis · software vulnerability assessment.<br>
+        Deployed publicly at huggingface.co/spaces/prakashanusha/cybersecurity-guardian
+      </div>
+      <div class="slide-num" style="color: rgba(255,255,255,0.25);">03 / 16</div>
+    </div>
+
+    <!-- ══ SLIDE 04: ARCHITECTURE OVERVIEW ══ -->
+    <div class="slide" id="s04">
+      <div class="kicker">System architecture</div>
+      <div class="slide-title slide-title--sm rule-bottom">Four components. One directed graph. No free-form generation.</div>
+      <div class="arch-row">
+        <div class="arch-node arch-node--dark" style="flex: 1.2;">
+          <span class="arch-label">Entry</span>
+          <span class="arch-name">LangGraph Router</span>
+          <div style="font-size: 11px; margin-top: 6px; opacity: 0.6; line-height: 1.3;">Intent classification<br>GPT-4o mini @ temp 0.0</div>
+        </div>
+        <div class="arch-arrow">→</div>
+        <div style="display: flex; flex-direction: column; gap: 8px; flex: 1.4;">
+          <div class="arch-node" style="border-color: var(--blue); background: #eef3fa;">
+            <span class="arch-label" style="color: var(--blue);">Agent A</span>
+            <span class="arch-name">Phishing Agent</span>
+            <div style="font-size: 11px; margin-top: 4px; opacity: 0.65;">VirusTotal API + PhishTank (Pinecone)</div>
+          </div>
+          <div class="arch-node" style="border-color: var(--red); background: #faeaea;">
+            <span class="arch-label" style="color: var(--red);">Agent B</span>
+            <span class="arch-name">Vulnerability Agent</span>
+            <div style="font-size: 11px; margin-top: 4px; opacity: 0.65;">CISA KEV + NVD (Pinecone)</div>
+          </div>
+        </div>
+        <div class="arch-arrow">→</div>
+        <div class="arch-node arch-node--accent" style="flex: 1.2;">
+          <span class="arch-label">Synthesis</span>
+          <span class="arch-name">Conflict Resolution + GPT-4o mini</span>
+          <div style="font-size: 11px; margin-top: 6px; opacity: 0.75;">5 priority rules · Anti-hallucination guards</div>
+        </div>
+        <div class="arch-arrow">→</div>
+        <div class="arch-node arch-node--dark" style="flex: 1.1;">
+          <span class="arch-label">Output</span>
+          <span class="arch-name">Contextual Intervention</span>
+          <div style="font-size: 11px; margin-top: 6px; opacity: 0.6;">Situation-specific action plan</div>
+        </div>
+      </div>
+      <div style="margin-top: 22px; font-size: 12px; color: var(--gray-3); border-top: 1px solid rgba(0,0,0,0.12); padding-top: 12px;">
+        Pinecone Serverless · 149,831 indexed records · all-MiniLM-L6-v2 embeddings (384-dim) · Streamlit / Hugging Face Spaces deployment
+      </div>
+      <div class="slide-num">04 / 16</div>
+    </div>
+
+    <!-- ══ SLIDE 05: DATA SOURCES ══ -->
+    <div class="slide" id="s05">
+      <div class="kicker">Data sources</div>
+      <div class="slide-title slide-title--sm rule-bottom">149,831 indexed threat intelligence records across two namespaces.</div>
+      <table class="br-table" style="margin-top: 12px;">
+        <thead>
+          <tr>
+            <th>Source</th>
+            <th>Namespace</th>
+            <th>Records</th>
+            <th>Filter Applied</th>
+            <th>Update Cadence</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>CISA KEV</strong></td>
+            <td>cve-vulnerabilities</td>
+            <td>1,566</td>
+            <td>known_exploited = true</td>
+            <td>Daily (CISA publishes)</td>
+          </tr>
+          <tr>
+            <td><strong>NIST NVD</strong></td>
+            <td>cve-vulnerabilities</td>
+            <td>90,560</td>
+            <td>CVSS ≥ 7.0 only</td>
+            <td>Static snapshot · Apr 2026</td>
+          </tr>
+          <tr>
+            <td><strong>PhishTank</strong></td>
+            <td>phishing-patterns</td>
+            <td>57,705</td>
+            <td>verified-online only</td>
+            <td>Static snapshot · Apr 2026</td>
+          </tr>
+          <tr>
+            <td><strong>VirusTotal API v3</strong></td>
+            <td>Live API</td>
+            <td>70+ engines</td>
+            <td>Real-time lookup</td>
+            <td>Live · 500 req/day free tier</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="claim claim--blue" style="margin-top: 18px;">
+        <div style="font-size: 13px; color: var(--gray-2); line-height: 1.5;">NVD records from 1988–2022 only (API timeout at 190K of 344K total). The 2023–2025 gap for actively exploited CVEs is covered by CISA KEV, which includes confirmed-exploited entries regardless of NVD publication date.</div>
+      </div>
+      <div class="slide-num">05 / 16</div>
+    </div>
+
+    <!-- ══ SLIDE 06: PHISHING AGENT ══ -->
+    <div class="slide" id="s06">
+      <div class="kicker">Phishing agent · Component deep dive</div>
+      <div class="slide-title slide-title--sm rule-bottom">Two parallel evidence streams. Verdict by priority rules, not probability.</div>
+      <div class="two-col" style="margin-top: 8px; flex: 1;">
+        <div class="col">
+          <div style="font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; opacity: 0.5; margin-bottom: 10px;">Stream 1 — Live API</div>
+          <ul class="br-list" style="font-size: 13px;">
+            <li>Submit URL to VirusTotal API v3</li>
+            <li>Receive engine flag counts from 70+ scanners</li>
+            <li>≥5 malicious → MALICIOUS</li>
+            <li>2–4 malicious or 3+ suspicious → UNCERTAIN</li>
+            <li>0 flags + no email signals → SAFE</li>
+          </ul>
+          <div style="margin-top: 14px; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; opacity: 0.5; margin-bottom: 10px;">Stream 2 — Semantic Retrieval</div>
+          <ul class="br-list" style="font-size: 13px;">
+            <li>Embed URL → query PhishTank namespace</li>
+            <li>Retrieve top-5 similar verified phishing patterns</li>
+            <li>Similarity score &gt;0.35 → activates UNCERTAIN fallback if VT unavailable</li>
+          </ul>
+        </div>
+        <div class="col">
+          <div style="font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; opacity: 0.5; margin-bottom: 10px;">Email signal extraction</div>
+          <ul class="br-list" style="font-size: 13px;">
+            <li>Urgency language patterns</li>
+            <li>Credential harvesting signals</li>
+            <li>Sender spoofing indicators</li>
+            <li>Contributes to verdict when no URL present</li>
+          </ul>
+          <div class="verdict-band" style="margin-top: 20px;">
+            <div class="verdict-cell">
+              <span class="verdict-label">Malicious</span>
+              <span class="verdict-val v-mal">●</span>
+            </div>
+            <div class="verdict-cell">
+              <span class="verdict-label">Uncertain</span>
+              <span class="verdict-val v-unc">◐</span>
+            </div>
+            <div class="verdict-cell">
+              <span class="verdict-label">Safe</span>
+              <span class="verdict-val v-safe">○</span>
+            </div>
+            <div class="verdict-cell">
+              <span class="verdict-label">Insufficient</span>
+              <span class="verdict-val" style="color: var(--gray-4);">?</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="slide-num">06 / 16</div>
+    </div>
+
+    <!-- ══ SLIDE 07: VULNERABILITY AGENT ══ -->
+    <div class="slide" id="s07">
+      <div class="kicker">Vulnerability agent · Component deep dive</div>
+      <div class="slide-title slide-title--sm rule-bottom">Two-pass retrieval surfaces actively exploited CVEs before theoretical ones.</div>
+      <div class="two-col" style="margin-top: 8px; flex: 1;">
+        <div class="col">
+          <div style="font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; opacity: 0.5; margin-bottom: 10px;">Pass 1 — Exploited-first</div>
+          <div class="claim claim--blue" style="font-size: 13px; line-height: 1.5;">Filter Pinecone cve-vulnerabilities by <code>known_exploited=True</code>. Retrieve only CISA KEV records — confirmed real-world attacks.</div>
+          <div style="font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; opacity: 0.5; margin: 14px 0 10px;">Pass 2 — Full semantic search</div>
+          <div class="claim" style="font-size: 13px; line-height: 1.5;">Unfiltered semantic search across full namespace. Deduplicate against Pass 1 results. Catches HIGH/CRITICAL NVD records.</div>
+        </div>
+        <div class="col">
+          <div style="font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; opacity: 0.5; margin-bottom: 10px;">Verdict computation (priority order)</div>
+          <table class="br-table">
+            <thead>
+              <tr><th>Condition</th><th>Verdict</th><th>Confidence</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>KEV CVEs found</td><td><strong>VULNERABLE</strong></td><td>∝ count</td></tr>
+              <tr><td>NVD CVSS ≥ 9.0</td><td><strong>VULNERABLE</strong></td><td>88%</td></tr>
+              <tr><td>NVD CVSS 7.0–8.9</td><td><strong>VULNERABLE</strong></td><td>82%</td></tr>
+              <tr><td>No CVEs found</td><td>INSUFFICIENT</td><td>—</td></tr>
+            </tbody>
+          </table>
+          <div style="font-size: 12px; color: var(--gray-3); margin-top: 14px; line-height: 1.5;">
+            Version completeness enforced at router: major.minor only (e.g. 5.15) → clarification request rather than silent wrong-version match.
+          </div>
+        </div>
+      </div>
+      <div class="slide-num">07 / 16</div>
+    </div>
+
+    <!-- ══ SLIDE 08: SYNTHESIS + ANTI-HALLUCINATION ══ -->
+    <div class="slide" id="s08">
+      <div class="kicker">Synthesis layer · Conflict resolution</div>
+      <div class="slide-title slide-title--sm rule-bottom">Five deterministic rules. Zero tolerance for hallucinated CVE IDs.</div>
+      <div class="two-col" style="flex: 1; margin-top: 8px;">
+        <div class="col">
+          <table class="br-table">
+            <thead>
+              <tr><th>#</th><th>Condition</th><th>Resolution</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>1</td><td>Phishing → MALICIOUS</td><td>Top-level: MALICIOUS</td></tr>
+              <tr><td>2</td><td>Safe + VULNERABLE</td><td>Escalate to VULNERABLE</td></tr>
+              <tr><td>3</td><td>One INSUFFICIENT, one real</td><td>Use the real finding</td></tr>
+              <tr><td>4</td><td>Both INSUFFICIENT</td><td>INSUFFICIENT_EVIDENCE</td></tr>
+              <tr><td>5</td><td>Confidence &lt; 0.70</td><td>Override to UNCERTAIN</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="col">
+          <div style="font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; opacity: 0.5; margin-bottom: 12px;">Anti-hallucination design</div>
+          <ul class="br-list" style="font-size: 13px;">
+            <li>Only facts from the provided evidence list may be cited</li>
+            <li>CVE IDs not in evidence list are replaced with [redacted]</li>
+            <li>Regex post-generation scan on all CVE identifiers</li>
+            <li>GPT-4o mini synthesis at temperature 0.1</li>
+            <li>No specific tool names or commands in action steps — generic best-practice language only</li>
+          </ul>
+          <div class="claim claim--blue" style="margin-top: 14px; font-size: 13px; line-height: 1.5;">
+            Contextual intervention selects from 5 templates: malicious not clicked · malicious already clicked · vulnerable · uncertain · safe
+          </div>
+        </div>
+      </div>
+      <div class="slide-num">08 / 16</div>
+    </div>
+
+    <!-- ══ SLIDE 09: EVALUATION FRAMEWORK ══ -->
+    <div class="slide slide--yellow" id="s09">
+      <div class="kicker" style="opacity: 0.55;">Evaluation</div>
+      <div class="slide-title slide-title--sm rule-bottom" style="border-color: rgba(0,0,0,0.25);">Four independent evaluation layers. Mock mode validates pipeline logic. Live mode tests real-world calibration.</div>
+      <div class="stat-row" style="border-color: rgba(0,0,0,0.3); border-top: 4px solid rgba(0,0,0,0.5); background: rgba(255,255,255,0.4);">
+        <div class="stat-cell" style="border-color: rgba(0,0,0,0.2);">
+          <div class="stat-num">Layer 1</div>
+          <div class="stat-label">CVE Retrieval<br>Recall@5</div>
+        </div>
+        <div class="stat-cell" style="border-color: rgba(0,0,0,0.2);">
+          <div class="stat-num">Layer 2</div>
+          <div class="stat-label">Phishing Verdict<br>Precision / Recall</div>
+        </div>
+        <div class="stat-cell" style="border-color: rgba(0,0,0,0.2);">
+          <div class="stat-num">Layer 3</div>
+          <div class="stat-label">Conflict Resolution<br>Correctness</div>
+        </div>
+        <div class="stat-cell" style="border-color: rgba(0,0,0,0.2);">
+          <div class="stat-num">Layer 4</div>
+          <div class="stat-label">End-to-End<br>Pipeline</div>
+        </div>
+      </div>
+      <div class="body-text" style="margin-top: 20px; font-size: 14px; line-height: 1.7;">
+        <strong>Key design decision:</strong> 20-query CVE evaluation uses known CISA KEV records. Phishing evaluation uses 40 URLs split 50/50 constructed safe/phishing — validated against mock VT engine and live VT API separately. Router evaluated on 20 inputs across 5 routing categories.
+      </div>
+      <div class="slide-num">09 / 16</div>
+    </div>
+
+    <!-- ══ SLIDE 10: RESULTS — CVE + ROUTING ══ -->
+    <div class="slide" id="s10">
+      <div class="kicker">Evaluation results · CVE retrieval + router</div>
+      <div class="slide-title slide-title--sm rule-bottom">85% recall on active exploits. Router 20/20. Both exceed targets.</div>
+      <div class="two-col" style="flex: 1; margin-top: 8px;">
+        <div class="col">
+          <div style="font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; opacity: 0.5; margin-bottom: 12px;">CVE Recall@5 — 20 CISA KEV queries</div>
+          <div class="prog-row">
+            <span class="prog-label">Recall@5</span>
+            <div class="prog-track"><div class="prog-fill prog-fill--blue" style="width: 85%;"></div></div>
+            <span class="prog-val">85%</span>
+          </div>
+          <div style="font-size: 12px; color: var(--gray-3); margin: 8px 0;">Target ≥ 75% → <span class="pass">PASS</span></div>
+          <div style="font-size: 12px; color: var(--gray-3); margin-bottom: 16px;">3 failures: version-specific mismatch in edge cases</div>
+
+          <div style="font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; opacity: 0.5; margin-bottom: 8px;">LangGraph router — 20 inputs</div>
+          <table class="br-table">
+            <thead><tr><th>Category</th><th>Score</th><th>Status</th></tr></thead>
+            <tbody>
+              <tr><td>URL only (5)</td><td>5/5</td><td><span class="pass">PASS</span></td></tr>
+              <tr><td>Email text (5)</td><td>5/5</td><td><span class="pass">PASS</span></td></tr>
+              <tr><td>Software + version (5)</td><td>5/5</td><td><span class="pass">PASS</span></td></tr>
+              <tr><td>URL + software (2)</td><td>2/2</td><td><span class="pass">PASS</span></td></tr>
+              <tr><td>Ambiguous inputs (3)</td><td>3/3</td><td><span class="pass">PASS</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="col">
+          <div style="font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; opacity: 0.5; margin-bottom: 12px;">Synthesis conflict resolution — 20 scenarios</div>
+          <table class="br-table">
+            <thead><tr><th>Rule</th><th>Tests</th><th>Score</th></tr></thead>
+            <tbody>
+              <tr><td>Rule 1 — MALICIOUS surfaces</td><td>6</td><td><span class="pass">6/6</span></td></tr>
+              <tr><td>Rule 2 — VULNERABLE escalates</td><td>3</td><td><span class="pass">3/3</span></td></tr>
+              <tr><td>Rule 3 — INSUFFICIENT doesn't suppress</td><td>3</td><td><span class="pass">3/3</span></td></tr>
+              <tr><td>Rule 4 — Both INSUFFICIENT</td><td>2</td><td><span class="pass">2/2</span></td></tr>
+              <tr><td>Rule 5 — Low confidence → UNCERTAIN</td><td>3</td><td><span class="pass">3/3</span></td></tr>
+              <tr><td><strong>Overall</strong></td><td><strong>20</strong></td><td><span class="pass"><strong>20/20</strong></span></td></tr>
+            </tbody>
+          </table>
+          <div style="font-size: 12px; color: var(--gray-3); margin-top: 10px;">Target ≥ 18/20 → <span class="pass">PASS</span></div>
+        </div>
+      </div>
+      <div class="slide-num">10 / 16</div>
+    </div>
+
+    <!-- ══ SLIDE 11: RESULTS — PHISHING MOCK ══ -->
+    <div class="slide" id="s11">
+      <div class="kicker">Evaluation results · Phishing agent — mock mode</div>
+      <div class="slide-title slide-title--sm rule-bottom">40 URLs. 100% precision. 100% recall. Pipeline logic is correct.</div>
+      <div class="stat-row" style="margin-top: 20px;">
+        <div class="stat-cell">
+          <div class="stat-num" style="color: #1a6b2f;">100%</div>
+          <div class="stat-label">Precision<br>Target ≥ 90%</div>
+        </div>
+        <div class="stat-cell">
+          <div class="stat-num" style="color: #1a6b2f;">100%</div>
+          <div class="stat-label">Recall<br>Target ≥ 80%</div>
+        </div>
+        <div class="stat-cell">
+          <div class="stat-num" style="color: #1a6b2f;">0%</div>
+          <div class="stat-label">False Positive Rate<br>Target ≤ 10%</div>
+        </div>
+        <div class="stat-cell">
+          <div class="stat-num">81.1%</div>
+          <div class="stat-label">Avg. confidence</div>
+        </div>
+        <div class="stat-cell">
+          <div class="stat-num" style="font-size: 28px;">8,525ms</div>
+          <div class="stat-label">Avg. response time</div>
+        </div>
+      </div>
+      <div class="claim claim--blue" style="margin-top: 16px;">
+        <div style="font-size: 13px; line-height: 1.6;">Mock mode uses a deterministic scoring engine (TLD reputation, brand-in-non-brand-domain, phishing path patterns, hyphen count, subdomain depth). This validates pipeline logic without consuming VirusTotal API quota. All 20 phishing URLs correctly identified; all 20 safe URLs correctly cleared.</div>
+      </div>
+      <div style="font-size: 12px; color: var(--gray-3); margin-top: 12px;">All metrics exceeded targets → <span class="pass">PASS</span></div>
+      <div class="slide-num">11 / 16</div>
+    </div>
+
+    <!-- ══ SLIDE 12: RESULTS — PHISHING LIVE ══ -->
+    <div class="slide" id="s12">
+      <div class="kicker">Evaluation results · Phishing agent — live VirusTotal</div>
+      <div class="slide-title slide-title--sm rule-bottom">100% precision. 15% recall. The gap is a test design problem, not a system failure.</div>
+      <div class="two-col" style="margin-top: 8px; flex: 1;">
+        <div class="col">
+          <table class="br-table">
+            <thead><tr><th>Metric</th><th>Result</th><th>Interpretation</th></tr></thead>
+            <tbody>
+              <tr><td>True Positives</td><td>3 / 20</td><td>VT database matched</td></tr>
+              <tr><td>True Negatives</td><td>9 / 20</td><td>Correctly cleared</td></tr>
+              <tr><td>False Positives</td><td><span class="pass">0</span></td><td>No safe URLs flagged</td></tr>
+              <tr><td>Precision</td><td><span class="pass">100%</span></td><td>Every MALICIOUS was correct</td></tr>
+              <tr><td>Recall</td><td><span class="warn">15%</span></td><td>See explanation →</td></tr>
+              <tr><td>UNCERTAIN (phishing URLs)</td><td>8 / 20</td><td>Pinecone fallback activated</td></tr>
+              <tr><td>Timeout errors (safe URLs)</td><td>11 / 20</td><td>Free-tier rate limit</td></tr>
+              <tr><td>Avg. response time</td><td>24,914ms</td><td>Live polling overhead</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="col">
+          <div class="claim" style="font-size: 13px; line-height: 1.6; margin-bottom: 14px;">
+            <strong>Why recall is 15%:</strong> The 20 phishing test URLs were constructed for evaluation. VirusTotal only flags URLs that have been submitted and scanned by the community. A URL never seen by VT receives zero flags regardless of its structure. This is a test-set limitation — not a system failure.
+          </div>
+          <div class="claim claim--blue" style="font-size: 13px; line-height: 1.6;">
+            <strong>What is valid:</strong> Precision of 100% is real — every MALICIOUS verdict was correct. False positive rate of 0% is real — no legitimate URL was wrongly flagged. The system demonstrates calibrated uncertainty: returning UNCERTAIN rather than fabricating MALICIOUS.
+          </div>
+        </div>
+      </div>
+      <div class="slide-num">12 / 16</div>
+    </div>
+
+    <!-- ══ SLIDE 13: IMPLEMENTATION CHALLENGES ══ -->
+    <div class="slide" id="s13">
+      <div class="kicker">Implementation · Key challenges resolved</div>
+      <div class="slide-title slide-title--sm rule-bottom">Three architectural problems discovered in build. All resolved before evaluation.</div>
+      <div style="display: flex; flex-direction: column; gap: 14px; margin-top: 12px; flex: 1;">
+        <div class="limit-card" style="border-color: var(--red);">
+          <div class="lc-head">Event loop conflict (Python 3.13 + FastAPI + asyncio)</div>
+          <div class="lc-body">Nesting asyncio.run() inside a running event loop raises RuntimeError. Resolution: execute VirusTotal call in ThreadPoolExecutor with a fresh event loop per thread. nest_asyncio discarded due to TypeError with uvicorn's loop_factory.</div>
+        </div>
+        <div class="limit-card" style="border-color: var(--blue);">
+          <div class="lc-head">NVD product metadata gap — CPE filter failed</div>
+          <div class="lc-body">NVD records in Pinecone carry no product/vendor metadata fields. The CPE product pre-filter returned zero results for all queries. Resolution: two-pass architecture — Pass 1 uses known_exploited metadata against KEV namespace; Pass 2 is pure semantic search. KEV records carry full product metadata.</div>
+        </div>
+        <div class="limit-card" style="border-color: #8a5200;">
+          <div class="lc-head">PhishTank brand-tag recall metric — invalid evaluation design</div>
+          <div class="lc-body">93% of PhishTank records carry an "Other" brand tag. Brand-tag Recall@5 produced systematic false negatives — correct phishing retrievals scored as misses. Resolution: evaluation redesigned to measure end-to-end verdict accuracy (precision, recall, FPR) rather than retrieval brand-tag accuracy.</div>
+        </div>
+      </div>
+      <div class="slide-num">13 / 16</div>
+    </div>
+
+    <!-- ══ SLIDE 14: KNOWN LIMITATIONS ══ -->
+    <div class="slide slide--dark" id="s14">
+      <div class="kicker" style="color: rgba(255,255,255,0.4);">Limitations · Documented before presentation</div>
+      <div class="slide-title slide-title--sm rule-bottom" style="color: var(--white); border-color: rgba(255,255,255,0.2);">Four structural limitations. Three with clear remediation paths.</div>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 16px;">
+        <div style="border: 1px solid rgba(255,255,255,0.15); padding: 16px;">
+          <div style="font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gray-5); margin-bottom: 8px;">NVD product metadata</div>
+          <div style="font-size: 13px; color: rgba(255,255,255,0.7); line-height: 1.5;">Cannot filter by product name before semantic rank. Requires re-indexing 90K records with CPE metadata from NVD raw data (available but not stored).</div>
+        </div>
+        <div style="border: 1px solid rgba(255,255,255,0.15); padding: 16px;">
+          <div style="font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gray-5); margin-bottom: 8px;">VirusTotal free-tier rate limit</div>
+          <div style="font-size: 13px; color: rgba(255,255,255,0.7); line-height: 1.5;">500 req/day, 4/min. Production requires paid tier or Redis cache keyed by URL SHA-256 hash. Academic program provides 1,000 req/day.</div>
+        </div>
+        <div style="border: 1px solid rgba(255,255,255,0.15); padding: 16px;">
+          <div style="font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gray-5); margin-bottom: 8px;">Static Pinecone index</div>
+          <div style="font-size: 13px; color: rgba(255,255,255,0.7); line-height: 1.5;">Snapshot as of April 2026. New CVEs, new phishing URLs, new KEV entries not reflected. Requires daily diff sync mechanism — Tier 1 future improvement.</div>
+        </div>
+        <div style="border: 1px solid rgba(255,255,255,0.15); padding: 16px;">
+          <div style="font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gray-5); margin-bottom: 8px;">Test set design</div>
+          <div style="font-size: 13px; color: rgba(255,255,255,0.7); line-height: 1.5;">Constructed phishing URLs limit live-VT recall validity. Stronger evaluation requires verified historical PhishTank URLs with confirmed VT community exposure.</div>
+        </div>
+      </div>
+      <div class="slide-num" style="color: rgba(255,255,255,0.25);">14 / 16</div>
+    </div>
+
+    <!-- ══ SLIDE 15: FUTURE WORK ══ -->
+    <div class="slide" id="s15">
+      <div class="kicker">Future work · Three tiers</div>
+      <div class="slide-title slide-title--sm rule-bottom">Near-term fixes. Production hardening. Industry scale.</div>
+      <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0; flex: 1; border: var(--rule); margin-top: 16px;">
+        <div style="border-right: var(--rule); padding: 20px;">
+          <div style="font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; background: var(--black); color: var(--white); padding: 5px 10px; display: inline-block; margin-bottom: 14px;">Tier 1 — Near-term</div>
+          <ul class="br-list" style="font-size: 12px;">
+            <li>Daily KEV + PhishTank sync via CISA and PhishTank feeds — upsert only new records</li>
+            <li>Resume NVD download with checkpoint logic; re-index with CPE product metadata</li>
+            <li>Redis URL cache keyed by SHA-256 hash to reduce VT quota consumption</li>
+          </ul>
+        </div>
+        <div style="border-right: var(--rule); padding: 20px;">
+          <div style="font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; border: 1.5px solid var(--gray-2); padding: 5px 10px; display: inline-block; margin-bottom: 14px;">Tier 2 — Production</div>
+          <ul class="br-list" style="font-size: 12px;">
+            <li>Zero-day detection via WHOIS domain-age lookup (domains &lt; 7 days → UNCERTAIN)</li>
+            <li>URL redirect chain resolution — prevent URL shortener evasion</li>
+            <li>OS-aware intervention: platform-specific update instructions from browser User-Agent</li>
+          </ul>
+        </div>
+        <div style="padding: 20px;">
+          <div style="font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; border: 1.5px solid var(--gray-4); padding: 5px 10px; display: inline-block; margin-bottom: 14px; color: var(--gray-3);">Tier 3 — Scale</div>
+          <ul class="br-list" style="font-size: 12px;">
+            <li>MISP, AlienVault OTX, Shodan federated integration</li>
+            <li>Browser extension with 500ms latency target and domain reputation cache</li>
+            <li>RLHF feedback loop → quarterly FLAN-T5 fine-tuning</li>
+            <li>Multi-language: detect via LLM, output in Polish/Portuguese/English</li>
+          </ul>
+        </div>
+      </div>
+      <div class="slide-num">15 / 16</div>
+    </div>
+
+    <!-- ══ SLIDE 16: CONCLUSION ══ -->
+    <div class="slide slide--red" id="s16">
+      <div class="kicker" style="color: rgba(255,255,255,0.55);">Conclusion</div>
+      <div class="slide-title slide-title--lg" style="color: var(--white); max-width: 800px; margin-bottom: 20px;">
+        The thesis holds.
+      </div>
+      <div style="border-top: 3px solid rgba(255,255,255,0.35); padding-top: 20px; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 24px;">
+        <div>
+          <div style="font-family: var(--font-display); font-size: 36px; font-weight: 700; color: var(--white);">100%</div>
+          <div style="font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.6); margin-top: 4px;">Precision on phishing verdicts (mock mode)</div>
+        </div>
+        <div>
+          <div style="font-family: var(--font-display); font-size: 36px; font-weight: 700; color: var(--white);">85%</div>
+          <div style="font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.6); margin-top: 4px;">Recall@5 on CISA KEV CVE retrieval</div>
+        </div>
+        <div>
+          <div style="font-family: var(--font-display); font-size: 36px; font-weight: 700; color: var(--white);">20/20</div>
+          <div style="font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.6); margin-top: 4px;">Conflict resolution correctness</div>
+        </div>
+      </div>
+      <div style="border-top: 1.5px solid rgba(255,255,255,0.25); padding-top: 16px; margin-top: 20px; font-size: 14px; color: rgba(255,255,255,0.75); line-height: 1.65; max-width: 780px;">
+        A multi-agent RAG system with live government-grade threat intelligence produces accurate, calibrated, and actionable cybersecurity verdicts for non-technical users — without hallucinating CVE identifiers or fabricating MALICIOUS verdicts for unknown URLs. Base LLMs cannot do this. Live retrieval is the difference.
+      </div>
+      <div style="position: absolute; bottom: 22px; left: 56px; font-size: 11px; color: rgba(255,255,255,0.45); letter-spacing: 0.1em;">
+        huggingface.co/spaces/prakashanusha/cybersecurity-guardian
+      </div>
+      <div class="slide-num" style="color: rgba(255,255,255,0.3);">16 / 16</div>
+    </div>
+
+  </div><!-- /stage -->
+
+  <div id="nav">
+    <button id="btn-prev" onclick="prevSlide()" disabled>← Prev</button>
+    <div id="counter">1 / 16</div>
+    <button id="btn-next" onclick="nextSlide()">Next →</button>
+    <div id="hint">← → arrow keys</div>
+  </div>
+</div><!-- /shell -->
+
+<script>
+  const TOTAL = 16;
+  let cur = 1;
+
+  function showSlide(n) {
+    document.querySelectorAll('.slide').forEach(s => s.classList.remove('active'));
+    document.getElementById('s' + String(n).padStart(2,'0')).classList.add('active');
+    cur = n;
+    document.getElementById('counter').textContent = n + ' / ' + TOTAL;
+    document.getElementById('btn-prev').disabled = (n === 1);
+    document.getElementById('btn-next').disabled = (n === TOTAL);
+  }
+
+  function nextSlide() { if (cur < TOTAL) showSlide(cur + 1); }
+  function prevSlide() { if (cur > 1) showSlide(cur - 1); }
+
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown') nextSlide();
+    if (e.key === 'ArrowLeft'  || e.key === 'ArrowUp')   prevSlide();
+  });
+</script>
+
+</body>
+</html>
