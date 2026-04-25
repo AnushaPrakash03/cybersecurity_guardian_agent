@@ -1,15 +1,3 @@
----
-title: Cybersecurity Guardian
-emoji: 🛡
-colorFrom: blue
-colorTo: gray
-sdk: streamlit
-sdk_version: 1.37.0
-app_file: app.py
-pinned: false
-license: mit
----
-
 # Personal Cybersecurity Guardian Agent
 
 **Live Demo:** https://huggingface.co/spaces/prakashanusha/cybersecurity-guardian
@@ -297,8 +285,10 @@ See LICENSE for full terms.
 ---
 
 ## Author
-
+```
 **Anusha Prakash**
 MS Information Systems, Northeastern University (May 2026)
 Substack: @anushaprakash1
 Hugging Face: prakashanusha
+
+```
