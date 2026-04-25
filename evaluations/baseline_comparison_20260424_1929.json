@@ -1,0 +1,128 @@
+{
+  "timestamp": "2026-04-24T23:29:30.803830+00:00",
+  "model": "gpt-4o-mini",
+  "summary": {
+    "baseline_correct": 5,
+    "guardian_correct": 5,
+    "baseline_evidence": 5,
+    "baseline_hallucinations": 0,
+    "total": 5
+  },
+  "results": [
+    {
+      "input_id": 1,
+      "input": "http://paypal-secure-verify.xyz/login/confirm",
+      "type": "Phishing URL",
+      "ground_truth": "MALICIOUS",
+      "baseline": {
+        "output": "1. Assessment: Dangerous\n\n2. Reasoning: The URL contains \"paypal-secure-verify,\" which is indicative of a phishing attempt. Legitimate PayPal URLs will not use such a format, and the use of \"xyz\" as a domain extension is often associated with less reputable sites. Phishing sites typically try to mimic legitimate services to steal user credentials.\n\n3. What the user should do: Do not enter any personal information or credentials on this site. Report the URL to PayPal and consider running a security scan on your device to ensure it has not been compromised. Always verify URLs before entering sensitive information.",
+        "time_ms": 3272,
+        "verdict_correct": true,
+        "has_evidence": true,
+        "possible_hallucination": false
+      },
+      "guardian": {
+        "verdict": "MALICIOUS",
+        "confidence": 0.7868055555555555,
+        "risk_score": 83,
+        "citations": [
+          "VirusTotal scan: 25/72 engines",
+          "PhishTank database: 5 similar patterns retrieved"
+        ],
+        "time_ms": 14426,
+        "correct": true
+      }
+    },
+    {
+      "input_id": 2,
+      "input": "I have Log4j 2.14.1 installed",
+      "type": "Vulnerability query",
+      "ground_truth": "VULNERABLE",
+      "baseline": {
+        "output": "1. Assessment: Dangerous\n\n2. Reasoning: Log4j 2.14.1 is known to contain a critical vulnerability (CVE-2021-44228), commonly referred to as \"Log4Shell.\" This vulnerability allows for remote code execution, which can be exploited by attackers to take control of affected systems. While 2.14.1 was released before the vulnerability was publicly disclosed, it is still susceptible to exploitation.\n\n3. What the user should do: It is highly recommended that you upgrade to a later version of Log4j, specifically 2.17.1 or later, which addresses this vulnerability. Additionally, review your systems for any signs of exploitation and ensure that you have appropriate security measures in place.",
+        "time_ms": 14646,
+        "verdict_correct": true,
+        "has_evidence": true,
+        "possible_hallucination": false
+      },
+      "guardian": {
+        "verdict": "VULNERABLE",
+        "confidence": 0.88,
+        "risk_score": 75,
+        "citations": [
+          "NIST National Vulnerability Database: 5 CVE(s) retrieved"
+        ],
+        "time_ms": 12397,
+        "correct": true
+      }
+    },
+    {
+      "input_id": 3,
+      "input": "https://www.google.com",
+      "type": "Safe URL",
+      "ground_truth": "SAFE",
+      "baseline": {
+        "output": "1. Assessment: Safe\n\n2. Reasoning: The URL provided is for Google, a well-known and reputable search engine and technology company. It is widely used and recognized as a legitimate website. There are no indications of malicious activity associated with this URL.\n\n3. What the user should do: You can safely visit this URL. However, always ensure that you are accessing it through a secure connection (look for \"https://\" in the URL) and be cautious of phishing attempts that may use similar-looking URLs.",
+        "time_ms": 2047,
+        "verdict_correct": true,
+        "has_evidence": true,
+        "possible_hallucination": false
+      },
+      "guardian": {
+        "verdict": "SAFE",
+        "confidence": 0.85,
+        "risk_score": 10,
+        "citations": [
+          "VirusTotal scan: 0/72 engines",
+          "PhishTank database: 5 similar patterns retrieved"
+        ],
+        "time_ms": 8998,
+        "correct": true
+      }
+    },
+    {
+      "input_id": 4,
+      "input": "check my zoom",
+      "type": "Ambiguous \u2014 missing version",
+      "ground_truth": "CLARIFY",
+      "baseline": {
+        "output": "1. Assessment: Cannot determine\n\n2. Reasoning: Without specific details about the version of Zoom you are using, any associated URLs, or the context in which you are asking for a check, I cannot assess its safety. Zoom has had vulnerabilities in the past, but the current safety of your installation would depend on whether you have the latest updates and patches.\n\n3. What the user should do: Ensure that you are using the latest version of Zoom by checking for updates within the application. Additionally, review any security settings and best practices recommended by Zoom to enhance your security while using the platform. If you have concerns about a specific link or email related to Zoom, please provide more details for further analysis.",
+        "time_ms": 3058,
+        "verdict_correct": true,
+        "has_evidence": true,
+        "possible_hallucination": false
+      },
+      "guardian": {
+        "verdict": "CLARIFY",
+        "confidence": 0.0,
+        "risk_score": 0,
+        "citations": [],
+        "time_ms": 4004,
+        "correct": true
+      }
+    },
+    {
+      "input_id": 5,
+      "input": "Check Apache HTTP Server 2.4.49",
+      "type": "Vulnerability query",
+      "ground_truth": "VULNERABLE",
+      "baseline": {
+        "output": "1. Assessment: Suspicious\n\n2. Reasoning: Apache HTTP Server 2.4.49 was released in September 2021 and is known to have vulnerabilities, including a critical security issue (CVE-2021-41773) that could allow an attacker to perform path traversal attacks. While the software itself is widely used and generally considered reliable, the presence of known vulnerabilities in this specific version raises concerns about its security posture.\n\n3. What the user should do: It is recommended to upgrade to a more recent version of Apache HTTP Server that addresses known vulnerabilities. Always ensure that you are using the latest stable release to mitigate security risks. Additionally, review the release notes and security advisories for any specific vulnerabilities associated with the version you are using.",
+        "time_ms": 3078,
+        "verdict_correct": true,
+        "has_evidence": true,
+        "possible_hallucination": false
+      },
+      "guardian": {
+        "verdict": "VULNERABLE",
+        "confidence": 0.88,
+        "risk_score": 75,
+        "citations": [
+          "NIST National Vulnerability Database: 5 CVE(s) retrieved"
+        ],
+        "time_ms": 12591,
+        "correct": true
+      }
+    }
+  ]
+}

@@ -1,0 +1,422 @@
+{
+  "timestamp": "2026-04-24T21:22:14.065922+00:00",
+  "metrics": {
+    "total": 40,
+    "tp": 3,
+    "fp": 0,
+    "tn": 9,
+    "fn": 17,
+    "uncertain_mal": 8,
+    "uncertain_safe": 0,
+    "precision": 1.0,
+    "recall": 0.15,
+    "f1_score": 0.2608695652173913,
+    "false_positive_rate": 0.0,
+    "accuracy": 0.3,
+    "avg_confidence": 0.5446840659340659,
+    "avg_time_ms": 24913.775,
+    "errors": 0
+  },
+  "results": [
+    {
+      "url": "http://paypal-secure-verify.xyz/login/confirm",
+      "expected": "MALICIOUS",
+      "verdict": "MALICIOUS",
+      "predicted": "MALICIOUS",
+      "correct": true,
+      "confidence": 0.7329670329670329,
+      "time_ms": 28155,
+      "error": null
+    },
+    {
+      "url": "http://paypal-account-verify.online/signin/credentials",
+      "expected": "MALICIOUS",
+      "verdict": "SAFE",
+      "predicted": "SAFE",
+      "correct": false,
+      "confidence": 0.7999999999999999,
+      "time_ms": 23187,
+      "error": null
+    },
+    {
+      "url": "http://apple-id-verify.tk/account/suspended",
+      "expected": "MALICIOUS",
+      "verdict": "UNCERTAIN",
+      "predicted": "UNCERTAIN",
+      "correct": false,
+      "confidence": 0.6,
+      "time_ms": 26170,
+      "error": null
+    },
+    {
+      "url": "http://apple-id-secure.online/verify/account",
+      "expected": "MALICIOUS",
+      "verdict": "SAFE",
+      "predicted": "SAFE",
+      "correct": false,
+      "confidence": 0.85,
+      "time_ms": 23596,
+      "error": null
+    },
+    {
+      "url": "http://microsoft-verify.online/password-reset",
+      "expected": "MALICIOUS",
+      "verdict": "SAFE",
+      "predicted": "SAFE",
+      "correct": false,
+      "confidence": 0.7999999999999999,
+      "time_ms": 23443,
+      "error": null
+    },
+    {
+      "url": "http://secure.login.microsoft-verify.xyz/auth",
+      "expected": "MALICIOUS",
+      "verdict": "UNCERTAIN",
+      "predicted": "UNCERTAIN",
+      "correct": false,
+      "confidence": 0.55,
+      "time_ms": 23106,
+      "error": null
+    },
+    {
+      "url": "http://secure-login-bankofamerica.xyz/verify/account/credentials",
+      "expected": "MALICIOUS",
+      "verdict": "UNCERTAIN",
+      "predicted": "UNCERTAIN",
+      "correct": false,
+      "confidence": 0.55,
+      "time_ms": 24402,
+      "error": null
+    },
+    {
+      "url": "http://bank-secure-login.xyz/verify",
+      "expected": "MALICIOUS",
+      "verdict": "UNCERTAIN",
+      "predicted": "UNCERTAIN",
+      "correct": false,
+      "confidence": 0.55,
+      "time_ms": 23726,
+      "error": null
+    },
+    {
+      "url": "http://irs-refund-claim.online/tax/refund/verify",
+      "expected": "MALICIOUS",
+      "verdict": "SAFE",
+      "predicted": "SAFE",
+      "correct": false,
+      "confidence": 0.85,
+      "time_ms": 24196,
+      "error": null
+    },
+    {
+      "url": "http://account-update.online/billing",
+      "expected": "MALICIOUS",
+      "verdict": "SAFE",
+      "predicted": "SAFE",
+      "correct": false,
+      "confidence": 0.85,
+      "time_ms": 24546,
+      "error": null
+    },
+    {
+      "url": "http://netflix-update-payment-details.vercel.app/",
+      "expected": "MALICIOUS",
+      "verdict": "MALICIOUS",
+      "predicted": "MALICIOUS",
+      "correct": true,
+      "confidence": 0.7714285714285714,
+      "time_ms": 25794,
+      "error": null
+    },
+    {
+      "url": "http://netflix-billing-update.site/account/payment",
+      "expected": "MALICIOUS",
+      "verdict": "SAFE",
+      "predicted": "SAFE",
+      "correct": false,
+      "confidence": 0.85,
+      "time_ms": 23789,
+      "error": null
+    },
+    {
+      "url": "http://verify-identity.site/login",
+      "expected": "MALICIOUS",
+      "verdict": "SAFE",
+      "predicted": "SAFE",
+      "correct": false,
+      "confidence": 0.7999999999999999,
+      "time_ms": 24132,
+      "error": null
+    },
+    {
+      "url": "http://secure-account-verify.xyz/credentials",
+      "expected": "MALICIOUS",
+      "verdict": "UNCERTAIN",
+      "predicted": "UNCERTAIN",
+      "correct": false,
+      "confidence": 0.55,
+      "time_ms": 23932,
+      "error": null
+    },
+    {
+      "url": "http://account-suspended-verify.online/restore",
+      "expected": "MALICIOUS",
+      "verdict": "SAFE",
+      "predicted": "SAFE",
+      "correct": false,
+      "confidence": 0.7999999999999999,
+      "time_ms": 24149,
+      "error": null
+    },
+    {
+      "url": "http://login-verify-secure.tk/account/suspended",
+      "expected": "MALICIOUS",
+      "verdict": "UNCERTAIN",
+      "predicted": "UNCERTAIN",
+      "correct": false,
+      "confidence": 0.55,
+      "time_ms": 25864,
+      "error": null
+    },
+    {
+      "url": "http://paypal-verify.xyz/login",
+      "expected": "MALICIOUS",
+      "verdict": "MALICIOUS",
+      "predicted": "MALICIOUS",
+      "correct": true,
+      "confidence": 0.7329670329670329,
+      "time_ms": 24135,
+      "error": null
+    },
+    {
+      "url": "http://apple-id-verify.online/suspended",
+      "expected": "MALICIOUS",
+      "verdict": "UNCERTAIN",
+      "predicted": "UNCERTAIN",
+      "correct": false,
+      "confidence": 0.55,
+      "time_ms": 24878,
+      "error": null
+    },
+    {
+      "url": "http://microsoft-office365-verify.xyz/login",
+      "expected": "MALICIOUS",
+      "verdict": "UNCERTAIN",
+      "predicted": "UNCERTAIN",
+      "correct": false,
+      "confidence": 0.55,
+      "time_ms": 25822,
+      "error": null
+    },
+    {
+      "url": "http://it-support-verify.online/reset",
+      "expected": "MALICIOUS",
+      "verdict": "SAFE",
+      "predicted": "SAFE",
+      "correct": false,
+      "confidence": 0.85,
+      "time_ms": 24470,
+      "error": null
+    },
+    {
+      "url": "https://www.google.com",
+      "expected": "SAFE",
+      "verdict": "SAFE",
+      "predicted": "SAFE",
+      "correct": true,
+      "confidence": 0.85,
+      "time_ms": 13769,
+      "error": null
+    },
+    {
+      "url": "https://www.microsoft.com",
+      "expected": "SAFE",
+      "verdict": "ERROR",
+      "predicted": "ERROR",
+      "correct": false,
+      "confidence": 0.0,
+      "time_ms": 33674,
+      "error": ""
+    },
+    {
+      "url": "https://www.apple.com",
+      "expected": "SAFE",
+      "verdict": "ERROR",
+      "predicted": "ERROR",
+      "correct": false,
+      "confidence": 0.0,
+      "time_ms": 33311,
+      "error": ""
+    },
+    {
+      "url": "https://www.amazon.com",
+      "expected": "SAFE",
+      "verdict": "SAFE",
+      "predicted": "SAFE",
+      "correct": true,
+      "confidence": 0.85,
+      "time_ms": 14997,
+      "error": null
+    },
+    {
+      "url": "https://www.linkedin.com",
+      "expected": "SAFE",
+      "verdict": "SAFE",
+      "predicted": "SAFE",
+      "correct": true,
+      "confidence": 0.85,
+      "time_ms": 14377,
+      "error": null
+    },
+    {
+      "url": "https://www.github.com",
+      "expected": "SAFE",
+      "verdict": "ERROR",
+      "predicted": "ERROR",
+      "correct": false,
+      "confidence": 0.0,
+      "time_ms": 33507,
+      "error": ""
+    },
+    {
+      "url": "https://www.nytimes.com",
+      "expected": "SAFE",
+      "verdict": "SAFE",
+      "predicted": "SAFE",
+      "correct": true,
+      "confidence": 0.85,
+      "time_ms": 13823,
+      "error": null
+    },
+    {
+      "url": "https://www.bbc.com",
+      "expected": "SAFE",
+      "verdict": "ERROR",
+      "predicted": "ERROR",
+      "correct": false,
+      "confidence": 0.0,
+      "time_ms": 32883,
+      "error": ""
+    },
+    {
+      "url": "https://northeastern.edu",
+      "expected": "SAFE",
+      "verdict": "SAFE",
+      "predicted": "SAFE",
+      "correct": true,
+      "confidence": 0.85,
+      "time_ms": 24116,
+      "error": null
+    },
+    {
+      "url": "https://mit.edu",
+      "expected": "SAFE",
+      "verdict": "SAFE",
+      "predicted": "SAFE",
+      "correct": true,
+      "confidence": 0.85,
+      "time_ms": 17743,
+      "error": null
+    },
+    {
+      "url": "https://www.cisa.gov",
+      "expected": "SAFE",
+      "verdict": "ERROR",
+      "predicted": "ERROR",
+      "correct": false,
+      "confidence": 0.0,
+      "time_ms": 33766,
+      "error": ""
+    },
+    {
+      "url": "https://www.nist.gov",
+      "expected": "SAFE",
+      "verdict": "ERROR",
+      "predicted": "ERROR",
+      "correct": false,
+      "confidence": 0.0,
+      "time_ms": 33887,
+      "error": ""
+    },
+    {
+      "url": "https://www.paypal.com",
+      "expected": "SAFE",
+      "verdict": "SAFE",
+      "predicted": "SAFE",
+      "correct": true,
+      "confidence": 0.85,
+      "time_ms": 12698,
+      "error": null
+    },
+    {
+      "url": "https://www.chase.com",
+      "expected": "SAFE",
+      "verdict": "ERROR",
+      "predicted": "ERROR",
+      "correct": false,
+      "confidence": 0.0,
+      "time_ms": 33340,
+      "error": ""
+    },
+    {
+      "url": "https://www.stackoverflow.com",
+      "expected": "SAFE",
+      "verdict": "ERROR",
+      "predicted": "ERROR",
+      "correct": false,
+      "confidence": 0.0,
+      "time_ms": 33576,
+      "error": ""
+    },
+    {
+      "url": "https://www.python.org",
+      "expected": "SAFE",
+      "verdict": "ERROR",
+      "predicted": "ERROR",
+      "correct": false,
+      "confidence": 0.0,
+      "time_ms": 32977,
+      "error": ""
+    },
+    {
+      "url": "https://www.netflix.com",
+      "expected": "SAFE",
+      "verdict": "ERROR",
+      "predicted": "ERROR",
+      "correct": false,
+      "confidence": 0.0,
+      "time_ms": 33168,
+      "error": ""
+    },
+    {
+      "url": "https://www.spotify.com",
+      "expected": "SAFE",
+      "verdict": "ERROR",
+      "predicted": "ERROR",
+      "correct": false,
+      "confidence": 0.0,
+      "time_ms": 33001,
+      "error": ""
+    },
+    {
+      "url": "https://www.ebay.com",
+      "expected": "SAFE",
+      "verdict": "SAFE",
+      "predicted": "SAFE",
+      "correct": true,
+      "confidence": 0.85,
+      "time_ms": 13542,
+      "error": null
+    },
+    {
+      "url": "https://www.walmart.com",
+      "expected": "SAFE",
+      "verdict": "SAFE",
+      "predicted": "SAFE",
+      "correct": true,
+      "confidence": 0.85,
+      "time_ms": 12904,
+      "error": null
+    }
+  ]
+}

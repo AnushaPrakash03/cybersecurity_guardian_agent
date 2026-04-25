@@ -1,0 +1,150 @@
+{
+  "timestamp": "2026-04-24T23:53:17.492236+00:00",
+  "model": "gpt-4o-mini",
+  "description": "Novel threat baseline comparison \u2014 post-Jan 2024 inputs only",
+  "summary": {
+    "phishing": {
+      "total": 3,
+      "baseline_correct": 3,
+      "guardian_correct": 1,
+      "baseline_admits_limits": 2,
+      "baseline_false_safe": 0
+    },
+    "vulnerability": {
+      "total": 2,
+      "baseline_correct": 2,
+      "guardian_correct": 2,
+      "baseline_knows_cve": 0
+    }
+  },
+  "results": [
+    {
+      "category": "phishing",
+      "input": "http://allegrolokalnie.pl-159.cfd",
+      "submitted": "2026-04-22",
+      "target": "Allegro",
+      "ground_truth": "MALICIOUS",
+      "baseline": {
+        "output": "1. Assessment: Suspicious\n\n2. Reasoning: The URL contains a domain that appears to be a subdomain of a potentially suspicious domain (cfd), which is often associated with free or low-cost hosting services. Such domains can sometimes be used for malicious purposes, including phishing or distributing malware. Additionally, the structure of the URL does not seem to follow typical patterns of well-known and reputable websites.\n\n3. What the user should do: Exercise caution when visiting this URL. It is advisable to avoid entering any personal information or downloading anything from the site. If you have concerns about the legitimacy of the site, consider using a search engine to look for reviews or reports about it, or consult with a cybersecurity professional for further analysis.",
+        "time_ms": 3377,
+        "verdict_correct": true,
+        "admits_uncertainty": false,
+        "false_safe": false,
+        "cites_live_data": false
+      },
+      "guardian": {
+        "verdict": "UNCERTAIN",
+        "confidence": 0.6,
+        "risk_score": 49,
+        "citations": [
+          "VirusTotal scan: 2/72 engines",
+          "PhishTank database: 5 similar patterns retrieved"
+        ],
+        "time_ms": 13708,
+        "correct": true
+      }
+    },
+    {
+      "category": "phishing",
+      "input": "https://allegro.923t48t7823gii.cfd",
+      "submitted": "2026-04-22",
+      "target": "Allegro",
+      "ground_truth": "MALICIOUS",
+      "baseline": {
+        "output": "1. Assessment: Suspicious\n\n2. Reasoning: The URL contains a subdomain that appears to be randomly generated and uses a less common top-level domain (.cfd), which is often associated with less reputable sites. Additionally, the structure of the URL does not provide any clear indication of legitimacy or trustworthiness. URLs with unusual patterns or unfamiliar domains can often be linked to phishing attempts or malicious content.\n\n3. What the user should do: Exercise caution and avoid clicking on the link. If you have already visited the site, consider running a security scan on your device and monitoring for any unusual activity. It may also be wise to report the URL to your organization's IT security team or a relevant authority for further investigation.",
+        "time_ms": 4510,
+        "verdict_correct": true,
+        "admits_uncertainty": true,
+        "false_safe": false,
+        "cites_live_data": false
+      },
+      "guardian": {
+        "verdict": "SAFE",
+        "confidence": 0.85,
+        "risk_score": 10,
+        "citations": [
+          "VirusTotal scan: 0/72 engines",
+          "PhishTank database: 5 similar patterns retrieved"
+        ],
+        "time_ms": 8497,
+        "correct": false
+      }
+    },
+    {
+      "category": "phishing",
+      "input": "http://biapjempresas.com",
+      "submitted": "2026-04-22",
+      "target": "Other",
+      "ground_truth": "MALICIOUS",
+      "baseline": {
+        "output": "1. Assessment: Suspicious\n\n2. Reasoning: The URL \"http://biapjempresas.com\" does not appear to be widely recognized or associated with reputable organizations based on my training data. URLs that are not well-known or lack a clear purpose can sometimes be used for phishing or distributing malware. Additionally, the use of \"http\" instead of \"https\" indicates that the site may not have a secure connection, which is a potential red flag.\n\n3. What the user should do: Exercise caution when visiting this URL. Consider using a web safety tool or browser extension to check the site's reputation. If you do not have a specific reason to visit this site, it may be best to avoid it. If you must visit, ensure your device has updated security software and consider using a virtual machine or sandbox environment to minimize risk.",
+        "time_ms": 2981,
+        "verdict_correct": true,
+        "admits_uncertainty": true,
+        "false_safe": false,
+        "cites_live_data": false
+      },
+      "guardian": {
+        "verdict": "SAFE",
+        "confidence": 0.85,
+        "risk_score": 10,
+        "citations": [
+          "VirusTotal scan: 0/72 engines",
+          "PhishTank database: 5 similar patterns retrieved"
+        ],
+        "time_ms": 8097,
+        "correct": false
+      }
+    },
+    {
+      "category": "vulnerability",
+      "input": "I am running XZ Utils 5.6.0",
+      "cve_id": "CVE-2024-3094",
+      "description": "XZ Utils backdoor \u2014 CVSS 10.0, CISA KEV March 2024. Malicious code inserted into XZ Utils 5.6.0 and 5.6.1. Post-cutoff for GPT-4o mini training data.",
+      "ground_truth": "VULNERABLE",
+      "baseline": {
+        "output": "1. Assessment: Suspicious\n\n2. Reasoning: XZ Utils is a widely used data compression tool, and version 5.6.0 is relatively old, as newer versions have been released since then. Older software versions can contain unpatched vulnerabilities that may be exploited by attackers. Without specific vulnerability information for this version, I cannot definitively say whether it is safe or dangerous.\n\n3. What the user should do: Consider upgrading to the latest version of XZ Utils to ensure you have the latest security patches and features. Additionally, review any security advisories related to XZ Utils to check for known vulnerabilities in version 5.6.0. Always ensure that your software is up to date to minimize security risks.",
+        "time_ms": 2583,
+        "verdict_correct": true,
+        "knows_cve": false,
+        "admits_uncertainty": true,
+        "cites_live_data": false
+      },
+      "guardian": {
+        "verdict": "VULNERABLE",
+        "confidence": 0.88,
+        "risk_score": 75,
+        "citations": [
+          "NIST National Vulnerability Database: 5 CVE(s) retrieved"
+        ],
+        "time_ms": 12689,
+        "correct": true
+      }
+    },
+    {
+      "category": "vulnerability",
+      "input": "Check Fortinet FortiOS 7.4.0 for vulnerabilities",
+      "cve_id": "CVE-2024-21762",
+      "description": "Fortinet FortiOS SSL VPN out-of-bounds write \u2014 CVSS 9.6, CISA KEV February 2024. Actively exploited. Post-cutoff for GPT-4o mini training data.",
+      "ground_truth": "VULNERABLE",
+      "baseline": {
+        "output": "1. Assessment: Cannot determine\n\n2. Reasoning: I do not have access to real-time databases or specific vulnerability information for Fortinet FortiOS 7.4.0. My training only includes general knowledge about cybersecurity practices and common vulnerabilities, but I cannot provide specific details about this software version or any vulnerabilities associated with it.\n\n3. What the user should do: I recommend checking the official Fortinet website or trusted cybersecurity resources for the latest security advisories and vulnerability information related to FortiOS 7.4.0. Additionally, consider subscribing to security bulletins or using vulnerability management tools to stay informed about any potential issues.",
+        "time_ms": 2735,
+        "verdict_correct": true,
+        "knows_cve": false,
+        "admits_uncertainty": true,
+        "cites_live_data": false
+      },
+      "guardian": {
+        "verdict": "VULNERABLE",
+        "confidence": 0.88,
+        "risk_score": 75,
+        "citations": [
+          "NIST National Vulnerability Database: 4 CVE(s) retrieved"
+        ],
+        "time_ms": 8394,
+        "correct": true
+      }
+    }
+  ]
+}

@@ -1,0 +1,39 @@
+# Core
+langchain>=0.3.0
+langchain-openai>=0.2.0
+langchain-community>=0.3.0
+openai>=1.40.0
+langgraph>=0.2.0
+
+# Vector DB
+pinecone>=3.0.0
+
+# Embeddings
+sentence-transformers>=3.0.0
+
+# Async fix
+nest-asyncio>=1.6.0
+
+# Data
+requests>=2.32.0
+python-dotenv>=1.0.0
+pydantic>=2.0.0
+pandas>=2.2.0
+
+# Evaluation (local only — kept for completeness)
+ragas>=0.1.0
+scikit-learn>=1.5.0
+numpy>=1.26.0
+
+# Frontend
+streamlit>=1.37.0
+plotly>=5.22.0
+
+# Backend (local only)
+fastapi>=0.112.0
+uvicorn>=0.30.0
+
+# Utilities
+tqdm>=4.66.0
+tenacity>=8.5.0
+cachetools>=5.4.0
