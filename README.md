@@ -285,8 +285,10 @@ See LICENSE for full terms.
 ---
 
 ## Author
-
+```
 **Anusha Prakash**
 MS Information Systems, Northeastern University (May 2026)
 Substack: @anushaprakash1
 Hugging Face: prakashanusha
+
+```
